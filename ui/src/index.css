@@ -1,0 +1,166 @@
+@import "tailwindcss";
+
+/* Cấu hình Tailwind v4 để nhận diện class .dark */
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --color-brand-primary: #6366f1;
+  --color-brand-secondary: #818cf8;
+}
+
+:root {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  line-height: 1.6;
+  font-weight: 400;
+
+  /* Font size tiêu chuẩn như đã hứa */
+  font-size: 16px; 
+
+  /* Palette Chế độ Sáng (Mặc định) */
+  --bg-main: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --text-main: #0f172a;
+  --text-muted: #64748b;
+  --border-color: #e2e8f0;
+  --card-bg: #ffffff;
+
+  color: var(--text-main);
+  background-color: var(--bg-main);
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+/* Định nghĩa lại biến khi có class .dark trên thẻ html */
+.dark {
+  --bg-main: #09090b;
+  --bg-secondary: #18181b;
+  --bg-glass: rgba(9, 9, 11, 0.85);
+  --text-main: #f8fafc; 
+  --text-muted: #94a3b8;
+  --border-color: #27272a;
+  --card-bg: #111113;
+
+  color-scheme: dark;
+}
+
+body {
+  margin: 0;
+  display: flex;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+  background-color: var(--bg-main);
+  color: var(--text-main);
+}
+
+#root {
+  width: 100%;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 10px;
+}
+.dark ::-webkit-scrollbar-thumb {
+  background: #3f3f46;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Glassmorphism utility */
+.glass {
+  background: var(--bg-glass);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--border-color);
+}
+
+/* Markdown styling overrides */
+.prose table {
+  width: 100%;
+  border-collapse: collapse;
+  margin: 1.5rem 0;
+  font-size: 0.9rem;
+}
+.prose th, .prose td {
+  border: 1px solid var(--border-color);
+  padding: 12px 16px;
+  text-align: left;
+}
+.prose th {
+  background-color: var(--bg-secondary);
+  font-weight: 700;
+  color: var(--text-main);
+  text-transform: uppercase;
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+}
+.prose tr:nth-child(even) {
+  background-color: rgba(0, 0, 0, 0.02);
+}
+.dark .prose tr:nth-child(even) {
+  background-color: rgba(255, 255, 255, 0.01);
+}
+
+.prose h1, .prose h2, .prose h3, .prose h4 {
+  font-weight: 800;
+  color: var(--text-main);
+  margin-top: 1.5rem;
+  margin-bottom: 0.75rem;
+  letter-spacing: -0.025em;
+}
+.prose h1 { font-size: 1.5rem; }
+.prose h2 { font-size: 1.25rem; border-bottom: 1px solid var(--border-color); padding-bottom: 0.25rem; }
+.prose h3 { font-size: 1.1rem; }
+
+.prose p {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  line-height: 1.7;
+}
+
+.prose strong {
+  font-weight: 700;
+  color: var(--color-brand-primary);
+}
+.dark .prose strong {
+  color: var(--color-brand-secondary);
+}
+
+.prose ul, .prose ol {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  padding-left: 1.5rem;
+}
+.prose ul {
+  list-style-type: disc;
+}
+.prose ol {
+  list-style-type: decimal;
+}
+.prose li {
+  margin-top: 0.25rem;
+  margin-bottom: 0.25rem;
+}
+
+.prose code {
+  font-family: monospace;
+  background-color: var(--bg-secondary);
+  padding: 2px 6px;
+  border-radius: 4px;
+  font-size: 0.85em;
+}

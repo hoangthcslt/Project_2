@@ -1,0 +1,61 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.pyo
+*.pyd
+.Python
+
+# Virtual Environment
+venv/
+.venv/
+env/
+ENV/
+
+# Environment Variables (KHÔNG commit .env thật)
+.env
+!.env.example
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# Logs
+logs/
+*.log
+
+# Docker
+docker-compose.override.yml
+
+# Data (CSV có thể lớn, quản lý riêng)
+# data/*.csv  # Uncomment nếu muốn exclude
+
+# Evaluation outputs
+evaluation_results.csv
+*.csv.bak
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Node (UI)
+ui/node_modules/
+ui/.next/
+ui/dist/
+ui/.env.local
+
+# Build artifacts
+dist/
+build/
+*.egg-info/
+.eggs/
+
+# Testing
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Jupyter (nếu dùng notebook để explore data)
+.ipynb_checkpoints/

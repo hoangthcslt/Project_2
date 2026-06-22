@@ -1,0 +1,58 @@
+services:
+  # =============================================
+  # Qdrant - Vector Database (Đã cấu hình Volume)
+  # =============================================
+  qdrant:
+    image: qdrant/qdrant:v1.9.4
+    container_name: qdrant_rag
+    restart: unless-stopped
+    ports:
+      - "6333:6333"
+    volumes:
+      - qdrant_data:/qdrant/storage
+    networks:
+      - rag_network
+
+  # =============================================
+  # Backend - FastAPI (Tự động build từ Dockerfile)
+  # =============================================
+  backend:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: backend_rag
+    restart: unless-stopped
+    ports:
+      - "8000:8000"
+    env_file:
+      - .env
+    environment:
+      - QDRANT_HOST=qdrant # Chú ý: Đổi localhost thành tên container "qdrant" trong mạng Docker
+    depends_on:
+      - qdrant
+    networks:
+      - rag_network
+
+  # =============================================
+  # Frontend - React + Nginx (Build từ ui/Dockerfile)
+  # =============================================
+  frontend:
+    build:
+      context: ./ui
+      dockerfile: Dockerfile
+    container_name: frontend_rag
+    restart: unless-stopped
+    ports:
+      - "80:80" # Map cổng 80 của container ra cổng 80 của máy em (truy cập thẳng bằng http://localhost)
+    depends_on:
+      - backend
+    networks:
+      - rag_network
+
+volumes:
+  qdrant_data:
+    driver: local
+
+networks:
+  rag_network:
+    driver: bridge
