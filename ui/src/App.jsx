@@ -108,7 +108,7 @@ const ProductCard = ({ product }) => {
     rawPrice = product.specs.price;
   }
   let numericPrice = parseFloat(String(rawPrice).replace(/[^0-9.]/g, '')) || 0;
-  
+
   // Giá trị trong cơ sở dữ liệu đã được quy đổi sang VND tại bước Ingestion.
   // Chúng ta hiển thị trực tiếp, phòng thủ nhân tỉ giá chỉ khi phát hiện số quá nhỏ.
   if (numericPrice > 0 && numericPrice < 200000) {
@@ -122,9 +122,9 @@ const ProductCard = ({ product }) => {
       }
     }
   }
-  
-  const priceString = numericPrice > 0 
-    ? Math.round(numericPrice).toLocaleString('vi-VN') + ' đ' 
+
+  const priceString = numericPrice > 0
+    ? Math.round(numericPrice).toLocaleString('vi-VN') + ' đ'
     : 'Liên hệ';
 
   // Giải quyết thông tin specs
@@ -136,7 +136,7 @@ const ProductCard = ({ product }) => {
     const parts = Object.entries(product.specs)
       .filter(([k]) => !excludeKeys.includes(k.toLowerCase()))
       .map(([k, v]) => `${k}: ${v}`);
-    
+
     if (product.specs.specs) {
       parts.unshift(product.specs.specs);
     }
